@@ -20,8 +20,11 @@
       "airbnb",
       "prettier"
     ],
+    "parser": "babel-eslint",
     "rules": {
-      "react/jsx-filename-extension": [0]
+      "react/jsx-filename-extension": [
+        0
+      ]
     },
     "env": {
       "browser": true
@@ -33,5 +36,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "enzyme-adapter-react-16": "^1.7.1"
+  }
 }
