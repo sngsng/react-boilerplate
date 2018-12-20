@@ -1,4 +1,4 @@
-/*eslint-disable */
+/* eslint-disable */
 const requestAnimationFrame = global.requestAnimationFrame = callback => {
   setTimeout(callback, 0);
 };

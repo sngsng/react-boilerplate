@@ -1,4 +1,4 @@
-/*eslint-disable */
+/* eslint-disable */
 import requestAnimationFrame from './setupPollyfills';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
