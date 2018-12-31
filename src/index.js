@@ -1,15 +1,20 @@
 /* eslint-disable */
 import React from "react";
 import ReactDOM from "react-dom";
-import createSagaMiddleware from "redux-saga";
 import { applyMiddleware, compose, createStore } from "redux";
 import { Provider } from "react-redux";
-import reducers from "./reducers";
+import createSagaMiddleware from "redux-saga";
+import { createBrowserHistory } from "history";
+import { ConnectedRouter, routerMiddleware } from "connected-react-router";
+import createRootReducer from "./reducers";
 import sagas from "./sagas";
 import App from "./components/App";
 
-const buildStore = () => {
+const history = createBrowserHistory();
+
+const buildStore = history => {
   const saga = createSagaMiddleware();
+  const connectedRouter = routerMiddleware(history);
   const middles = [saga];
   const enhancers = [];
 
@@ -26,14 +31,16 @@ const buildStore = () => {
     ...enhancers
   );
 
-  saga.run(sagas);
+  // saga.run(sagas);
 
-  return createStore(reducers, composedEnhancers);
+  return createStore(createRootReducer(history), composedEnhancers);
 };
 
 ReactDOM.render(
-  <Provider store={buildStore()}>
-    <App />
+  <Provider store={buildStore(history)}>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );
